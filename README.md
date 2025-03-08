@@ -68,6 +68,7 @@ Navigate to your home directory and clone the latest DevStack repository:
 git clone https://opendev.org/openstack/devstack.git
 cd devstack
 ```
+![image](https://github.com/user-attachments/assets/65bcb3d7-ef55-44c6-b4b5-d2f96cd888a1)
 
 ---
 
@@ -103,6 +104,8 @@ GIT_BASE=https://opendev.org
 ```
 
 Save and exit (CTRL+X, then Y, then ENTER).
+
+![image](https://github.com/user-attachments/assets/ef9bcd86-bffa-4c9f-ad22-f60378253b63)
 
 ---
 
