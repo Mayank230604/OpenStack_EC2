@@ -18,7 +18,7 @@ This document provides a comprehensive guide on setting up **OpenStack** on an *
 
 ![image](https://github.com/user-attachments/assets/ea0ae67d-551b-4d5d-9d6f-65cdeb8492ee)
 
-![image](https://github.com/user-attachments/assets/272a10bd-ff85-4420-8732-77f896a8c3d7)
+![image](https://github.com/user-attachments/assets/61409e01-2983-4b5c-bf59-0d0884963bd4)
 
 
 ### **2. Software Requirements**
