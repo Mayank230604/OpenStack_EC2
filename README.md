@@ -110,7 +110,7 @@ GIT_BASE=https://opendev.org
 
 Save and exit (CTRL+X, then Y, then ENTER).
 
-![image](https://github.com/user-attachments/assets/ef9bcd86-bffa-4c9f-ad22-f60378253b63)
+![image](https://github.com/user-attachments/assets/ad725943-6387-4e97-9fd2-b4dcad91803b)
 
 ---
 
