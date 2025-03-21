@@ -73,7 +73,7 @@ Navigate to your home directory and clone the latest DevStack repository:
 git clone https://opendev.org/openstack/devstack.git
 cd devstack
 ```
-![image](https://github.com/user-attachments/assets/65bcb3d7-ef55-44c6-b4b5-d2f96cd888a1)
+![image](https://github.com/user-attachments/assets/cbb053f4-e9d8-4140-a47c-64107f440dde)
 
 ---
 
