@@ -18,6 +18,8 @@ This document provides a comprehensive guide on setting up **OpenStack** on an *
 
 ![image](https://github.com/user-attachments/assets/ea0ae67d-551b-4d5d-9d6f-65cdeb8492ee)
 
+![image](https://github.com/user-attachments/assets/b7e01757-4520-4e14-9440-3a2e54570f33)
+
 
 ### **2. Software Requirements**
 - **PuTTY or Terminal** for SSH access
