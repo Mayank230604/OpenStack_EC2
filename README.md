@@ -139,6 +139,10 @@ http://your-ec2-public-ip/dashboard
 - **Username:** `admin`
 - **Password:** `SuperSecret` (as defined in `local.conf`)
 
+![image](https://github.com/user-attachments/assets/92629a6b-4ab1-4833-9bb3-de18b532fd0d)
+
+![image](https://github.com/user-attachments/assets/afedc404-8489-4a3a-8ea2-c02d8787ed6c)
+
 ---
 
 ## **7. Verify OpenStack Services**
