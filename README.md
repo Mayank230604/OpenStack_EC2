@@ -156,6 +156,8 @@ openstack service list
 
 If successful, you should see a list of active OpenStack services.
 
+![image](https://github.com/user-attachments/assets/4a32c325-da99-48ca-bf23-4d90ab8df359)
+
 ---
 
 ## **8. Conclusion**
