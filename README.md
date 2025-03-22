@@ -121,6 +121,7 @@ Run the DevStack installation script, which may take **30-45 minutes**:
 ```bash
 ./stack.sh
 ```
+![image](https://github.com/user-attachments/assets/0dd8d73a-ee79-4910-bd01-ad4c4680ff62)
 
 If the installation is successful, you will see a confirmation message: `DevStack installed successfully!`.
 
