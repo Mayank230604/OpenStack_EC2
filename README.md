@@ -129,7 +129,7 @@ URL: `http://EC2_Public_IP/dashboard`
 - Username: `admin`
 - Password: `SuperSecret`
 
-![Horizon Login](https://github.com/user-attachments/assets/92629a6b-4ab1-4833-9bb3-de18b532fd0d)
+![image](https://github.com/user-attachments/assets/085d9919-8cf3-40d3-a4bb-18d5a429507a)
 
 ---
 
