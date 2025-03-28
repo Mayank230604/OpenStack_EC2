@@ -88,18 +88,28 @@ DATABASE_PASSWORD=$ADMIN_PASSWORD
 RABBIT_PASSWORD=$ADMIN_PASSWORD
 SERVICE_PASSWORD=$ADMIN_PASSWORD
 
+# Set Host IP (Detects Automatically)
 HOST_IP=$(hostname -I | awk '{print $1}')
 
+# Enable Only Essential Services
 disable_service tempest
-disable_service cinder
+#disable_service cinder
 disable_service swift
 disable_service heat
 
+# Use Latest OpenStack Release
 USE_PYTHON3=True
 GIT_BASE=https://opendev.org
+
+enable_service cinder
+enable_service c-api
+enable_service c-vol
+enable_service c-sch
+enable_service c-bak  # If you want volume backups
+
 ```
 
-![Config File](https://github.com/user-attachments/assets/ad725943-6387-4e97-9fd2-b4dcad91803b)
+![Screenshot from 2025-03-29 02-03-20](https://github.com/user-attachments/assets/d3afe8b9-c1b6-4998-a48e-30bd2a509461)
 
 ---
 
