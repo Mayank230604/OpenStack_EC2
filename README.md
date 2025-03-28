@@ -72,7 +72,7 @@ git clone https://opendev.org/openstack/devstack.git
 cd devstack
 ```
 
-![DevStack Clone](https://github.com/user-attachments/assets/cbb053f4-e9d8-4140-a47c-64107f440dde)
+![image](https://github.com/user-attachments/assets/a832551c-d86d-4a7c-9e32-6998b75c7846)
 
 ---
 
