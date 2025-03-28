@@ -203,8 +203,6 @@ openstack service list
    openstack server create --image Ubuntu-22.04 --flavor m1.small --key-name my-key --network private-net my-instance
    ```
 
-![VM Creation](https://github.com/user-attachments/assets/9251dad9-2565-4e9d-92b0-c5b959eeff3b)
-
 ---
 
 ## **10. Conclusion**
