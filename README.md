@@ -125,11 +125,16 @@ enable_service c-bak  # If you want volume backups
 
 ## **6. Access Horizon Dashboard**
 URL: `http://EC2_Public_IP/dashboard`  
+
+![image](https://github.com/user-attachments/assets/085d9919-8cf3-40d3-a4bb-18d5a429507a)
+
 **Credentials:**
 - Username: `admin`
 - Password: `SuperSecret`
 
-![image](https://github.com/user-attachments/assets/085d9919-8cf3-40d3-a4bb-18d5a429507a)
+![image](https://github.com/user-attachments/assets/1399443d-4df3-4adf-b726-c8b2f08e6a72)
+
+![image](https://github.com/user-attachments/assets/0741a952-b3a0-4c98-9deb-81566af855a5)
 
 ---
 
