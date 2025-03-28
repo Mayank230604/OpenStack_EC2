@@ -152,7 +152,12 @@ openstack service list
 | Neutron  | `openstack network agent list` |
 | Glance   | `openstack image list` |
 
-![Service Verification](https://github.com/user-attachments/assets/4864989c-a066-4a55-a86e-b23841f5f273)
+![image](https://github.com/user-attachments/assets/bc6c8902-e8bc-453a-8848-14564446f381)
+
+![image](https://github.com/user-attachments/assets/7ef9c56a-4ca8-4df2-b382-767b60f65dcc)
+
+![image](https://github.com/user-attachments/assets/fac9a2c4-7734-4f1a-86e2-62c134af4faf)
+
 
 ---
 
