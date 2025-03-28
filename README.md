@@ -1,63 +1,64 @@
-# **Deploying OpenStack on an EC2 Instance**
+# **Deploying OpenStack on an EC2 Instance - Comprehensive Guide**
 
-This document provides a comprehensive guide on setting up **OpenStack** on an **AWS EC2 instance** using DevStack. By following these steps, you will successfully deploy OpenStack and access the Horizon dashboard for cloud management.
+This document provides a complete, step-by-step guide for setting up **OpenStack** on an **AWS EC2 instance** using DevStack, including service verification and VM deployment.
+
+---
+
+## **Table of Contents**
+1. [Prerequisites](#prerequisites)
+2. [Connecting to EC2 Instance](#1-connecting-to-the-ec2-instance)
+3. [System Setup](#2-update-system-and-install-dependencies)
+4. [DevStack Installation](#3-clone-the-devstack-repository)
+5. [Configuration](#4-create-a-devstack-configuration-file)
+6. [OpenStack Deployment](#5-install-openstack-using-devstack)
+7. [Accessing Horizon](#6-access-the-openstack-horizon-dashboard)
+8. [Service Verification](#7-verify-openstack-services)
+9. [Troubleshooting](#8-troubleshooting-and-service-management)
+10. [VM Deployment](#9-deploying-a-virtual-machine)
+11. [Conclusion](#10-conclusion)
 
 ---
 
 ## **Prerequisites**
 
 ### **1. AWS EC2 Instance Requirements**
-
-- **AMI (Operating System):** Ubuntu 22.04 LTS (Latest Stable Version)
-- **Instance Type:** `t2.large` (Minimum: 2 vCPUs, 8GB RAM)
-- **Storage:** Allocate at least **30GB** (default 8GB is insufficient for OpenStack)
-- **Key Pair:** Generate or use an existing SSH key for secure authentication.
+- **AMI:** Ubuntu 22.04 LTS (Recommended)
+- **Instance Type:** `t2.large` (Minimum 2 vCPUs, 8GB RAM)
+- **Storage:** At least **30GB** (Default 8GB is insufficient)
+- **Key Pair:** Existing or newly created SSH key
 - **Security Group Rules:**
-  - **SSH (22):** Allow access from your IP.
-  - **HTTP (80, 443):** Open access for the OpenStack Horizon dashboard.
-
-![image](https://github.com/user-attachments/assets/ea0ae67d-551b-4d5d-9d6f-65cdeb8492ee)
-
-![image](https://github.com/user-attachments/assets/61409e01-2983-4b5c-bf59-0d0884963bd4)
-
+  - **SSH (22):** Restricted to your IP
+  - **HTTP (80) & HTTPS (443):** Open for Horizon dashboard
 
 ### **2. Software Requirements**
-- **PuTTY or Terminal** for SSH access
-- **PuTTYgen** (if using PuTTY on Windows) for key conversion
-- **Git** (installed on the instance)
-- **Python 3** and required dependencies
+- **Windows:** PuTTY + PuTTYgen for SSH
+- **Linux/macOS:** Native terminal with SSH
+- **Git & Python 3** (Installed automatically in setup)
+
+![EC2 Instance Setup](https://github.com/user-attachments/assets/ea0ae67d-551b-4d5d-9d6f-65cdeb8492ee)
 
 ---
 
 ## **1. Connecting to the EC2 Instance**
 
-### **For Windows Users (Using PuTTY)**
+### **Windows (PuTTY)**
+```markdown
+1. Convert PEM to PPK using PuTTYgen
+2. In PuTTY:
+   - Host: EC2_Public_IP
+   - Connection > SSH > Auth: Load PPK file
+3. Login as `ubuntu`
+```
 
-1. **Convert PEM to PPK (PuTTY Private Key Format)**:
-   - Open **PuTTYgen**.
-   - Click **Load**, select your `.pem` file.
-   - Click **Save private key** and save it as `.ppk`.
-
-2. **Launch PuTTY and Connect to EC2**:
-   - Open **PuTTY**.
-   - In **Host Name**, enter the public IP of the EC2 instance.
-   - Navigate to **Connection > SSH > Auth**.
-   - Click **Browse**, select the `.ppk` file.
-   - Click **Open** and log in as `ubuntu`.
-
-### **For macOS & Linux Users (Using Terminal)**
-
+### **Linux/macOS (Terminal)**
 ```bash
 chmod 400 your-key.pem
-ssh -i your-key.pem ubuntu@your-ec2-public-ip
+ssh -i your-key.pem ubuntu@EC2_Public_IP
 ```
 
 ---
 
 ## **2. Update System and Install Dependencies**
-
-Before proceeding with the installation, update and upgrade the system packages:
-
 ```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y git python3-dev python3-pip net-tools
@@ -65,28 +66,21 @@ sudo apt install -y git python3-dev python3-pip net-tools
 
 ---
 
-## **3. Clone the DevStack Repository**
-
-Navigate to your home directory and clone the latest DevStack repository:
-
+## **3. Clone DevStack Repository**
 ```bash
 git clone https://opendev.org/openstack/devstack.git
 cd devstack
 ```
-![image](https://github.com/user-attachments/assets/cbb053f4-e9d8-4140-a47c-64107f440dde)
+
+![DevStack Clone](https://github.com/user-attachments/assets/cbb053f4-e9d8-4140-a47c-64107f440dde)
 
 ---
 
-## **4. Create a DevStack Configuration File**
-
-Create and edit a `local.conf` file to customize the OpenStack installation:
-
+## **4. Create DevStack Configuration**
 ```bash
 nano local.conf
 ```
-
-Paste the following configuration:
-
+Paste:
 ```ini
 [[local|localrc]]
 ADMIN_PASSWORD=SuperSecret
@@ -94,75 +88,117 @@ DATABASE_PASSWORD=$ADMIN_PASSWORD
 RABBIT_PASSWORD=$ADMIN_PASSWORD
 SERVICE_PASSWORD=$ADMIN_PASSWORD
 
-# Automatically detect the host IP
 HOST_IP=$(hostname -I | awk '{print $1}')
 
-# Enable only essential services
 disable_service tempest
 disable_service cinder
 disable_service swift
 disable_service heat
 
-# Use the latest OpenStack release
 USE_PYTHON3=True
 GIT_BASE=https://opendev.org
 ```
 
-Save and exit (CTRL+X, then Y, then ENTER).
-
-![image](https://github.com/user-attachments/assets/ad725943-6387-4e97-9fd2-b4dcad91803b)
+![Config File](https://github.com/user-attachments/assets/ad725943-6387-4e97-9fd2-b4dcad91803b)
 
 ---
 
 ## **5. Install OpenStack Using DevStack**
-
-Run the DevStack installation script, which may take **30-45 minutes**:
-
 ```bash
 ./stack.sh
 ```
-![image](https://github.com/user-attachments/assets/0dd8d73a-ee79-4910-bd01-ad4c4680ff62)
+*Takes 30-45 minutes*
 
-If the installation is successful, you will see a confirmation message: `DevStack installed successfully!`.
+![Installation](https://github.com/user-attachments/assets/0dd8d73a-ee79-4910-bd01-ad4c4680ff62)
 
 ---
 
-## **6. Access the OpenStack Horizon Dashboard**
+## **6. Access Horizon Dashboard**
+URL: `http://EC2_Public_IP/dashboard`  
+**Credentials:**
+- Username: `admin`
+- Password: `SuperSecret`
 
-Once the installation is complete, access the OpenStack **Horizon UI** by opening a web browser and navigating to:
-
-```bash
-http://your-ec2-public-ip/dashboard
-```
-
-### **Login Credentials:**
-- **Username:** `admin`
-- **Password:** `SuperSecret` (as defined in `local.conf`)
-
-![image](https://github.com/user-attachments/assets/92629a6b-4ab1-4833-9bb3-de18b532fd0d)
-
-![image](https://github.com/user-attachments/assets/afedc404-8489-4a3a-8ea2-c02d8787ed6c)
+![Horizon Login](https://github.com/user-attachments/assets/92629a6b-4ab1-4833-9bb3-de18b532fd0d)
 
 ---
 
 ## **7. Verify OpenStack Services**
-
-Before proceeding with cloud management, confirm that OpenStack services are running:
-
 ```bash
 source openrc admin admin
 openstack service list
 ```
 
-If successful, you should see a list of active OpenStack services.
+### **Individual Service Checks**
+| Service  | Verification Command |
+|----------|----------------------|
+| Keystone | `openstack token issue` |
+| Nova     | `openstack compute service list` |
+| Neutron  | `openstack network agent list` |
+| Glance   | `openstack image list` |
 
-![image](https://github.com/user-attachments/assets/4864989c-a066-4a55-a86e-b23841f5f273)
+![Service Verification](https://github.com/user-attachments/assets/4864989c-a066-4a55-a86e-b23841f5f273)
 
 ---
 
-## **8. Conclusion**
+## **8. Troubleshooting and Service Management**
 
-You have successfully deployed OpenStack on an AWS EC2 instance. You can now use the Horizon Dashboard or OpenStack CLI to manage cloud instances, networking, and storage.
+### **Common Issues**
+1. **Service Down**
+   ```bash
+   sudo systemctl restart devstack@SERVICE_NAME
+   ```
+2. **Horizon Not Accessible**
+   ```bash
+   sudo systemctl restart apache2
+   ```
 
-For more advanced configurations and troubleshooting, refer to the [DevStack Documentation](https://github.com/openstack/devstack).
+### **Log Locations**
+- DevStack logs: `/opt/stack/logs`
+- Service logs: `/var/log/SERVICE_NAME`
 
+---
+
+## **9. Deploying a Virtual Machine**
+
+### **Step-by-Step VM Creation**
+1. **Create Key Pair**
+   - Navigate: Project → Compute → Key Pairs
+   - Create & Download `.pem` file
+
+2. **Upload Cloud Image**
+   ```bash
+   wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+   openstack image create --file jammy-server-cloudimg-amd64.img "Ubuntu-22.04"
+   ```
+
+3. **Create Network**
+   ```bash
+   openstack network create private-net
+   openstack subnet create --network private-net --subnet-range 192.168.1.0/24 private-subnet
+   ```
+
+4. **Launch Instance**
+   ```bash
+   openstack server create --image Ubuntu-22.04 --flavor m1.small --key-name my-key --network private-net my-instance
+   ```
+
+![VM Creation](https://github.com/user-attachments/assets/9251dad9-2565-4e9d-92b0-c5b959eeff3b)
+
+---
+
+## **10. Conclusion**
+
+You now have a fully functional OpenStack environment on AWS EC2. This setup is ideal for:
+- Development and testing
+- Learning OpenStack
+- Proof-of-concept deployments
+
+For production environments, consider:
+- Multi-node deployment
+- High availability configuration
+- Enhanced security measures
+
+**References:**
+- [DevStack Documentation](https://docs.openstack.org/devstack/latest/)
+- [OpenStack CLI Reference](https://docs.openstack.org/python-openstackclient/latest/cli/)
