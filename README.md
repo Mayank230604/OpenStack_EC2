@@ -119,7 +119,7 @@ enable_service c-bak  # If you want volume backups
 ```
 *Takes 30-45 minutes*
 
-![image](https://github.com/user-attachments/assets/4b332e6a-0023-4a27-8ee8-7d8494772290)
+![image](https://github.com/user-attachments/assets/a0a40b44-e7d3-4005-b076-756a8e9281ee)
 
 ---
 
