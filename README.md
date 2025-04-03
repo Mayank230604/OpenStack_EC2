@@ -190,7 +190,7 @@ You’ll need this to SSH into your VM!
 
 1. Go to **Project → Compute → Key Pairs**  
 2. Click **Create Key Pair**  
-   - **Name:** `my-key`  
+   - **Name:** `test-key`  
    - **Key Type:** `SSH Key (RSA)`  
 3. **Download** the `.pem` file (Keep it safe!)  
 
