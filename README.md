@@ -285,6 +285,9 @@ You’ve just **built your own private cloud** on AWS! 🎉
 
 **Happy Cloud Building!** ☁️🚀  
 
+**References:**
+- [DevStack Documentation](https://docs.openstack.org/devstack/latest/)
+- [OpenStack CLI Reference](https://docs.openstack.org/python-openstackclient/latest/cli/)
 ---
 
 **💬 Got questions?**  
