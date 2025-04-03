@@ -91,18 +91,21 @@ nano local.conf  # Time for some config magic!
 Paste this **optimized** config:  
 ```ini
 [[local|localrc]]
-ADMIN_PASSWORD=SuperSecret  # Change this if you want!
+ADMIN_PASSWORD=SuperSecret
 DATABASE_PASSWORD=$ADMIN_PASSWORD
 RABBIT_PASSWORD=$ADMIN_PASSWORD
 SERVICE_PASSWORD=$ADMIN_PASSWORD
 
-# Auto-detect IP (No manual work!)
+# Set Host IP (Detects Automatically)
 HOST_IP=$(hostname -I | awk '{print $1}')
 
-# Only essential services (Keeps it light!)
-disable_service tempest cinder swift heat
+# Enable Only Essential Services
+disable_service tempest
+disable_service cinder
+disable_service swift
+disable_service heat
 
-# Python 3 & Latest OpenStack
+# Use Latest OpenStack Release
 USE_PYTHON3=True
 GIT_BASE=https://opendev.org
 ```
