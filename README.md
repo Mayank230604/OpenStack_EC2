@@ -153,7 +153,7 @@ openstack service list  # Check all services
 | **Neutron** | `openstack network agent list` |
 | **Glance** | `openstack image list` |
 
-[image](https://github.com/user-attachments/assets/bc6c8902-e8bc-453a-8848-14564446f381)
+![image](https://github.com/user-attachments/assets/bc6c8902-e8bc-453a-8848-14564446f381)
 
 ![image](https://github.com/user-attachments/assets/7ef9c56a-4ca8-4df2-b382-767b60f65dcc)
 
