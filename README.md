@@ -93,7 +93,7 @@ HOST_IP=$(hostname -I | awk '{print $1}')
 
 # Enable Only Essential Services
 disable_service tempest
-#disable_service cinder
+disable_service cinder
 disable_service swift
 disable_service heat
 
