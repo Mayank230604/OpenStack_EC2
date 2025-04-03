@@ -268,7 +268,7 @@ Time for liftoff!
 Once the VM is **Active**, connect via:  
 
 ```bash
-chmod 400 my-key.pem
+chmod 400 test-key.pem
 ssh -i my-key.pem ubuntu@<VM_IP>
 ```
 **🎉 Congrats! You’re in your OpenStack VM!**  
