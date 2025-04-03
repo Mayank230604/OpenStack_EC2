@@ -174,32 +174,96 @@ openstack service list
 
 ---
 
-## **9. Deploying a Virtual Machine**
 
-### **Step-by-Step VM Creation**
-1. **Create Key Pair**
-   - Navigate: Project → Compute → Key Pairs
-   - Create & Download `.pem` file
+## **9. Deploy an Instance (VM) in Openstack Horizon**
 
-2. **Upload Cloud Image**
-   ```bash
-   wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
-   openstack image create --file jammy-server-cloudimg-amd64.img "Ubuntu-22.04"
-   ```
+1️⃣ **Open Openstack Dashboard**
 
-3. **Create Network**
-   ```bash
-   openstack network create private-net
-   openstack subnet create --network private-net --subnet-range 192.168.1.0/24 private-subnet
-   ```
+  - Open your browser and go to:
+  ```bash
+  http://your-ec2-public-ip/dashboard
+  ```
+  - **Login Credentials**:
+    - **Username**: `admin`
+    - **Password**: `SuperSecret`
 
-4. **Launch Instance**
-   ```bash
-   openstack server create --image Ubuntu-22.04 --flavor m1.small --key-name my-key --network private-net my-instance
-   ```
+2️⃣ **Create a New Key Pair**
+
+1. Go to: `Project` → `Compute` → `Key Pairs`
+2. Click: `Create Key Pair`
+3. Enter a Name: Example: `my-key`
+4. Key Type: Select `SSH Key (RSA)`
+5. Click: `Create Key Pair`
+6. Download the Private Key (`.pem` file) and store it safely!
+    - Example: `my-key.pem`
+
+![7](https://github.com/user-attachments/assets/88f6c6a2-bc04-4e29-b37e-f2c8ed00791d)
+
+3️⃣ **Upload an Image (OS for the VM)**
+
+1. Go to: `Project` → `Compute` → `Images`
+2. Click: `Create Image`
+3. Enter Details:
+    - Name: `Ubuntu-22.04`
+    - Image Source: `Upload Image`
+    - Format: `QCOW2`
+    - URL (for Ubuntu 22.04):
+    ```bash
+    https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+    ```
+4. Click: `Create Image`
+5. Wait for the image to upload.
+
+![8](https://github.com/user-attachments/assets/40cbae48-aebc-4611-8311-977b99e29487)
+
+4️⃣ **Create a Flavor (VM Size)**
+
+1. Go to: `Admin` → `Compute` → `Flavors`
+2. Click: `Create Flavor`
+3. Set the Following:
+    - Name: `small`
+    - vCPUs: `1`
+    - RAM: `2048` MB (2GB)
+    - Disk: `10` GB
+4. Click: `Create Flavor`
+
+![9](https://github.com/user-attachments/assets/576a9810-29a3-405a-89ec-326fb98f4c6a)
+
+5️⃣ **Set Up Networking**
+
+1. Go to: `Project` → `Network` → `Networks`
+2. Click: `Create Network`
+3. Enter Details:
+    - Network Name: `private-net`
+    - Subnet Name: `private-subnet`
+    - Network Address: `192.168.1.0/24`
+4. Click: `Create`
+
+Then, set up a router:
+1. Go to: `Project` → `Network` → `Routers`
+2. Click: `Create Router`
+3. Set Name: `my-router`
+4. Click: `Create Router`
+
+Now `delete` the default `router` and go back to `Networks` and delete the `private network` as well.
+
+![10](https://github.com/user-attachments/assets/1d607160-813d-464b-832e-a8743f464f72)
+
+6️⃣ **Launch an Instance (VM)**
+
+1. Go to: `Project` → `Compute` → `Instances`
+2. Click: `Launch Instance`
+3. Enter Instance Details:
+    - Instance Name: `my-instance`
+    - Flavor: Select `small` (1 vCPU, 2GB RAM)
+    - Image: Select your uploaded image (e.g., `Ubuntu-22.04`)
+    - Network: Select `private-net`
+    - Key Pair: Select `my-key`
+4. Click: `Launch Instance`
+
+![11](https://github.com/user-attachments/assets/9251dad9-2565-4e9d-92b0-c5b959eeff3b)
 
 ---
-
 ## **10. Conclusion**
 
 You now have a fully functional OpenStack environment on AWS EC2. This setup is ideal for:
