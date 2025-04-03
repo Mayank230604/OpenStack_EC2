@@ -175,107 +175,159 @@ openstack service list
 ---
 
 
-## **9. Deploy an Instance (VM) in Openstack Horizon**
+# **9. Deploying a Virtual Machine (VM) in OpenStack Horizon**
 
-1️⃣ **Open Openstack Dashboard**
-
-  - Open your browser and go to:
-  ```bash
-  http://your-ec2-public-ip/dashboard
-  ```
-  - **Login Credentials**:
-    - **Username**: `admin`
-    - **Password**: `SuperSecret`
-
-2️⃣ **Create a New Key Pair**
-
-1. Go to: `Project` → `Compute` → `Key Pairs`
-2. Click: `Create Key Pair`
-3. Enter a Name: Example: `my-key`
-4. Key Type: Select `SSH Key (RSA)`
-5. Click: `Create Key Pair`
-6. Download the Private Key (`.pem` file) and store it safely!
-    - Example: `my-key.pem`
-
-![7](https://github.com/user-attachments/assets/88f6c6a2-bc04-4e29-b37e-f2c8ed00791d)
-
-3️⃣ **Upload an Image (OS for the VM)**
-
-1. Go to: `Project` → `Compute` → `Images`
-2. Click: `Create Image`
-3. Enter Details:
-    - Name: `Ubuntu-22.04`
-    - Image Source: `Upload Image`
-    - Format: `QCOW2`
-    - URL (for Ubuntu 22.04):
-    ```bash
-    https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
-    ```
-4. Click: `Create Image`
-5. Wait for the image to upload.
-
-![8](https://github.com/user-attachments/assets/40cbae48-aebc-4611-8311-977b99e29487)
-
-4️⃣ **Create a Flavor (VM Size)**
-
-1. Go to: `Admin` → `Compute` → `Flavors`
-2. Click: `Create Flavor`
-3. Set the Following:
-    - Name: `small`
-    - vCPUs: `1`
-    - RAM: `2048` MB (2GB)
-    - Disk: `10` GB
-4. Click: `Create Flavor`
-
-![9](https://github.com/user-attachments/assets/576a9810-29a3-405a-89ec-326fb98f4c6a)
-
-5️⃣ **Set Up Networking**
-
-1. Go to: `Project` → `Network` → `Networks`
-2. Click: `Create Network`
-3. Enter Details:
-    - Network Name: `private-net`
-    - Subnet Name: `private-subnet`
-    - Network Address: `192.168.1.0/24`
-4. Click: `Create`
-
-Then, set up a router:
-1. Go to: `Project` → `Network` → `Routers`
-2. Click: `Create Router`
-3. Set Name: `my-router`
-4. Click: `Create Router`
-
-Now `delete` the default `router` and go back to `Networks` and delete the `private network` as well.
-
-![10](https://github.com/user-attachments/assets/1d607160-813d-464b-832e-a8743f464f72)
-
-6️⃣ **Launch an Instance (VM)**
-
-1. Go to: `Project` → `Compute` → `Instances`
-2. Click: `Launch Instance`
-3. Enter Instance Details:
-    - Instance Name: `my-instance`
-    - Flavor: Select `small` (1 vCPU, 2GB RAM)
-    - Image: Select your uploaded image (e.g., `Ubuntu-22.04`)
-    - Network: Select `private-net`
-    - Key Pair: Select `my-key`
-4. Click: `Launch Instance`
-
-![11](https://github.com/user-attachments/assets/9251dad9-2565-4e9d-92b0-c5b959eeff3b)
+This section provides a structured, step-by-step guide to deploying a virtual machine (VM) in OpenStack using the Horizon dashboard. Follow these instructions carefully to ensure a successful deployment.
 
 ---
-## **10. Conclusion**
 
-You now have a fully functional OpenStack environment on AWS EC2. This setup is ideal for:
-- Development and testing
-- Learning OpenStack
-- Proof-of-concept deployments
+## **Step 1: Access the OpenStack Horizon Dashboard**
+1. Open a web browser and navigate to:
+   ```bash
+   http://<EC2_Public_IP>/dashboard
+   ```
+2. Log in using the following credentials:
+   - **Username:** `admin`  
+   - **Password:** `SuperSecret` (or the one you set in `local.conf`)
 
-For production environments, consider:
-- Multi-node deployment
-- High availability configuration
-- Enhanced security measures
+---
 
-**References:**
-- [DevStack Documentation](https://docs.openstack.org/devstack/latest/)
-- [OpenStack CLI Reference](https://docs.openstack.org/python-openstackclient/latest/cli/)
+## **Step 2: Create a Key Pair for SSH Access**
+A key pair is required to securely access your VM via SSH.
+
+### **Steps:**
+1. Navigate to:  
+   **Project → Compute → Key Pairs**
+2. Click **Create Key Pair**.
+3. Enter the following details:
+   - **Name:** `my-key`  
+   - **Key Type:** `SSH Key (RSA)`  
+4. Click **Create Key Pair**.
+5. The private key (`my-key.pem`) will automatically download.  
+   **⚠️ Store this securely—it cannot be retrieved later!**
+
+![Key Pair Creation](https://github.com/user-attachments/assets/88f6c6a2-bc04-4e29-b37e-f2c8ed00791d)
+
+---
+
+## **Step 3: Upload a Cloud Image (OS for the VM)**
+OpenStack requires a base OS image to launch VMs. We'll use Ubuntu 22.04.
+
+### **Steps:**
+1. Navigate to:  
+   **Project → Compute → Images**
+2. Click **Create Image**.
+3. Fill in the details:
+   - **Name:** `Ubuntu-22.04`  
+   - **Image Source:** `URL`  
+   - **Format:** `QCOW2`  
+   - **URL:**  
+     ```bash
+     https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+     ```
+4. Click **Create Image**.
+5. Wait for the image to upload (status changes to **Active**).
+
+![Uploading Cloud Image](https://github.com/user-attachments/assets/40cbae48-aebc-4611-8311-977b99e29487)
+
+---
+
+## **Step 4: Define a Flavor (VM Resource Allocation)**
+A **flavor** determines the CPU, RAM, and disk allocation for your VM.
+
+### **Steps:**
+1. Navigate to:  
+   **Admin → Compute → Flavors**
+2. Click **Create Flavor**.
+3. Configure the following:
+   - **Name:** `small`  
+   - **vCPUs:** `1`  
+   - **RAM (MB):** `2048` (2GB)  
+   - **Root Disk (GB):** `10`  
+4. Click **Create Flavor**.
+
+![Creating a Flavor](https://github.com/user-attachments/assets/576a9810-29a3-405a-89ec-326fb98f4c6a)
+
+---
+
+## **Step 5: Configure Networking**
+A network must be set up for the VM to communicate.
+
+### **A. Create a Private Network**
+1. Navigate to:  
+   **Project → Network → Networks**
+2. Click **Create Network**.
+3. Enter:
+   - **Network Name:** `private-net`  
+   - **Subnet Name:** `private-subnet`  
+   - **Network Address:** `192.168.1.0/24`  
+4. Click **Create**.
+
+### **B. Set Up a Router**
+1. Navigate to:  
+   **Project → Network → Routers**
+2. Click **Create Router**.
+3. Enter:
+   - **Router Name:** `my-router`  
+4. Click **Create Router**.
+
+> **Note:** Delete the default router and network if they exist.
+
+![Network Configuration](https://github.com/user-attachments/assets/1d607160-813d-464b-832e-a8743f464f72)
+
+---
+
+## **Step 6: Launch the Virtual Machine**
+Now, deploy a VM using the uploaded image, key pair, and network.
+
+### **Steps:**
+1. Navigate to:  
+   **Project → Compute → Instances**
+2. Click **Launch Instance**.
+3. Configure the VM:
+   - **Instance Name:** `my-instance`  
+   - **Flavor:** `small` (1 vCPU, 2GB RAM)  
+   - **Image:** `Ubuntu-22.04`  
+   - **Network:** `private-net`  
+   - **Key Pair:** `my-key`  
+4. Click **Launch Instance**.
+
+![Launching a VM](https://github.com/user-attachments/assets/9251dad9-2565-4e9d-92b0-c5b959eeff3b)
+
+---
+
+## **Step 7: Access the VM via SSH**
+Once the VM is **Active**, you can SSH into it.
+
+### **Steps:**
+1. Retrieve the VM’s **IP Address** from the **Instances** tab.
+2. Use the downloaded private key (`my-key.pem`) to SSH:
+   ```bash
+   chmod 400 my-key.pem
+   ssh -i my-key.pem ubuntu@<VM_IP>
+   ```
+
+---
+
+## **Troubleshooting**
+| Issue | Solution |
+|-------|----------|
+| **SSH Connection Fails** | Ensure the security group allows SSH (port 22). |
+| **VM Stuck in "Spawning"** | Check `/var/log/nova/nova-compute.log` for errors. |
+| **No Internet in VM** | Verify the router has an external gateway. |
+
+---
+
+## **Conclusion**
+You have successfully deployed a VM in OpenStack Horizon. This setup is ideal for:
+- **Testing cloud workloads**  
+- **Learning OpenStack**  
+- **Developing cloud-native applications**  
+
+For production, consider:
+- **Multi-node clusters**  
+- **Load balancing & auto-scaling**  
+- **Persistent storage (Cinder)**  
+
+**Next Steps:**  
+Explore [OpenStack CLI](https://docs.openstack.org/python-openstackclient/latest/) for advanced automation. 🚀
