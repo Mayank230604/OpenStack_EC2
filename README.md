@@ -129,6 +129,9 @@ Hold tight—this will take **30-45 mins**! ☕
 Your OpenStack GUI is ready!  
 
 🌐 **URL:** `http://EC2_Public_IP/dashboard`  
+
+![image](https://github.com/user-attachments/assets/085d9919-8cf3-40d3-a4bb-18d5a429507a)
+
 🔑 **Login:**  
 - **Username:** `admin`  
 - **Password:** `SuperSecret`  
