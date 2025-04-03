@@ -236,12 +236,15 @@ A VM needs a network!
 ### **A. Create a Private Network**
 1. **Project → Network → Networks**  
 2. **Create Network**  
-   - **Name:** `private-net`  
-   - **Subnet:** `192.168.1.0/24`  
+   - **Name:** `private-net`
+   - **Subnet Name:** `private-subnet`
+   - **Subnet Address:** `192.168.1.0/24`  
 
 ### **B. Add a Router**
 1. **Project → Network → Routers**  
-2. **Create Router** → Name: `my-router`  
+2. **Create Router** → Name: `my-router`
+
+Now `delete` the default `router` and go back to `Networks` and delete the `private network` as well.
 
 ![image](https://github.com/user-attachments/assets/721f1e81-7603-48aa-998a-c55a387547c2)
 
@@ -253,11 +256,11 @@ Time for liftoff!
 
 1. Go to **Project → Compute → Instances**  
 2. Click **Launch Instance**  
-   - **Name:** `my-vm`  
+   - **Name:** `my-instance`  
    - **Flavor:** `small`  
    - **Image:** `Ubuntu-22.04`  
    - **Network:** `private-net`  
-   - **Key Pair:** `my-key`  
+   - **Key Pair:** `test-key`  
 
 ![image](https://github.com/user-attachments/assets/75794a8a-fb53-44de-a0fd-a64b4945edcd)
 
