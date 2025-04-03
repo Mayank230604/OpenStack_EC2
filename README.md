@@ -138,6 +138,7 @@ Your OpenStack GUI is ready!
 
 ![Horizon Dashboard](https://github.com/user-attachments/assets/1399443d-4df3-4adf-b726-c8b2f08e6a72)
 
+![image](https://github.com/user-attachments/assets/0741a952-b3a0-4c98-9deb-81566af855a5)
 ---
 
 ## **✅ Step 7: Verify Services**
