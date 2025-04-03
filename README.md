@@ -101,11 +101,6 @@ disable_service heat
 USE_PYTHON3=True
 GIT_BASE=https://opendev.org
 
-enable_service cinder
-enable_service c-api
-enable_service c-vol
-enable_service c-sch
-enable_service c-bak  # If you want volume backups
 
 ```
 
