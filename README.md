@@ -190,6 +190,7 @@ You’ll need this to SSH into your VM!
    - **Key Type:** `SSH Key (RSA)`  
 3. **Download** the `.pem` file (Keep it safe!)  
 
+![image](https://github.com/user-attachments/assets/a16c9f3f-b32f-4ae1-8980-195ae1956340)
 
 ---
 
@@ -206,6 +207,7 @@ We’ll use **Ubuntu 22.04** for the VM.
      ```
 3. Wait for **Active** status  
 
+![image](https://github.com/user-attachments/assets/3bb64c90-c086-4e5d-ae3a-2251934fdd6e)
 
 ---
 
@@ -218,6 +220,8 @@ A **flavor** = VM size (CPU, RAM, Disk).
    - **vCPUs:** `1`  
    - **RAM:** `2048 MB`  
    - **Disk:** `10 GB`  
+
+![image](https://github.com/user-attachments/assets/6a7e2ebc-e8fc-49d0-9113-9ec4de57c025)
 
 
 ---
@@ -235,6 +239,8 @@ A VM needs a network!
 1. **Project → Network → Routers**  
 2. **Create Router** → Name: `my-router`  
 
+![image](https://github.com/user-attachments/assets/721f1e81-7603-48aa-998a-c55a387547c2)
+
 
 ---
 
@@ -248,6 +254,8 @@ Time for liftoff!
    - **Image:** `Ubuntu-22.04`  
    - **Network:** `private-net`  
    - **Key Pair:** `my-key`  
+
+![image](https://github.com/user-attachments/assets/75794a8a-fb53-44de-a0fd-a64b4945edcd)
 
 
 ---
